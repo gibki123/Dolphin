@@ -11,6 +11,8 @@ public class ButtonHandler : MonoBehaviour {
     public static Button OnClickShopButton;
     public static Button OnClickTryAgainButton;
     public static Button OnClickBackButton;
+    public RectTransform fishCounterScore;
+    public RectTransform slider;
     public RectTransform gameName;
     public RectTransform gameButtons;
     public RectTransform shopWindow;
@@ -26,6 +28,7 @@ public class ButtonHandler : MonoBehaviour {
         OnClickStartButton += MoveObjects;
         OnClickStartButton += EnableMoveScript;
         OnClickStartButton += ChangeGameStateToGame;
+        OnClickStartButton += slideInGameUI;
         OnClickShopButton += MoveObjects;
         OnClickShopButton += ShopClick;
         OnClickTryAgainButton += HideDeathPanel;
@@ -34,6 +37,7 @@ public class ButtonHandler : MonoBehaviour {
         OnClickTryAgainButton += DisableMoveScript;
         OnClickTryAgainButton += ReturnBreathSliderValue;
         OnClickTryAgainButton += ReturnFishCounter;
+        OnClickTryAgainButton += slideOutGameUI;
         OnClickBackButton += MoveBackObjects;
 
 
@@ -103,5 +107,15 @@ public class ButtonHandler : MonoBehaviour {
 
     void ReturnFishCounter() {
         fishCounter.text = "Fish: 0";
+    }
+
+    void slideInGameUI() {
+        slider.DOAnchorPosY(-5, 1f);
+        fishCounterScore.DOAnchorPosY(-5, 1f);
+    }
+
+    void slideOutGameUI() {
+        slider.DOAnchorPosY(30, 1f);
+        fishCounterScore.DOAnchorPosY(30, 1f);
     }
 }
