@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: 73ea8c53a8e3919469ab6b224a12b975
+labels:
+- Effect
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -8,10 +10,16 @@ ModelImporter:
     400000: default
     400002: //RootNode
     2100000: Material
+    2100002: defaultMat
     2300000: default
     3300000: default
     4300000: default
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 7cf042f3a7789c74a945492b56ce5883, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

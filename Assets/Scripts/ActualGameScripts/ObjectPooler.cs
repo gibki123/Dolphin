@@ -18,6 +18,10 @@ public class ObjectPooler : MonoBehaviour {
     [SerializeField]
     public Dictionary<string, Queue<GameObject>> poolDictionary;
 
+
+    // Initializing GameObjects from pools
+    // Searching for appropriate tagged GameObjects change position to default position and
+    // spawn objects as much as it is written in inspector
     public void Awake() {
         Instance = this;
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
@@ -34,6 +38,8 @@ public class ObjectPooler : MonoBehaviour {
         }
     }
 
+    // This can be used for spawning objects in certain position you can spawn only 
+    // maximum value of objects which are written in inspector
     public GameObject SpawnFromPool(string tag, Vector3 position) {
         if (poolDictionary.ContainsKey(tag)) {
             if (poolDictionary.Count != 0) {

@@ -33,6 +33,7 @@ public class DolphinMovement : MonoBehaviour
         GameState.gamePlay = true;
     }
 
+    //If Dolphin is inside object named water
     void OnTriggerStay(Collider other)
     {
         if(other == waterCollider && GameState.gamePlay == true)
@@ -42,7 +43,9 @@ public class DolphinMovement : MonoBehaviour
             {
                 rb.AddForce(swimForce * Time.deltaTime);
             }
-            breathingSlider.value -= 1 / holdingBreathTime * Time.deltaTime;
+            if (!GameState.upgradesBought[0]) {
+                breathingSlider.value -= 1 / holdingBreathTime * Time.deltaTime;
+            }
         }
     }
 

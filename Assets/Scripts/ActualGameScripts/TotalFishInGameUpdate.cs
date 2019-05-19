@@ -10,10 +10,6 @@ public class TotalFishInGameUpdate : MonoBehaviour
     public delegate void UpdateFish();
     public static UpdateFish updateFish;
 
-    private void Update() {
-      //  Debug.Log(PlayerPrefs.GetInt("TotalNumberOfFish"));
-    }
-
     private void Awake() {
         updateFish += UpdateText;
         updateFish?.Invoke();

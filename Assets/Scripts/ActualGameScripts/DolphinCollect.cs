@@ -11,6 +11,9 @@ public class DolphinCollect : MonoBehaviour
          if(other.transform.tag == "CollectableFish") {
             other.gameObject.SetActive(false);
             FishCounter.Instance.IncrementScore();
+            if (GameState.upgradesBought[2]) {
+                FishCounter.Instance.IncrementScore();
+            }
         }
     }
 }

@@ -65,6 +65,7 @@ public class ObjectSpawner : MonoBehaviour
         }
     }
 
+    // For now Spwaning only fish with random position in range of water maybe later something to add 
     IEnumerator spawnCollectables(float minSpawnTime, float maxSpawnTime) {
         float randomSpawnTime = Random.Range(minSpawnTime, maxSpawnTime);
         float randomSpawnY = Random.Range(bottomSpawningLimit, topSpawningLimit);
@@ -76,6 +77,7 @@ public class ObjectSpawner : MonoBehaviour
         spawningCoroutine = false;
     }
 
+    //This checks if object schould be disabled or not
     private void CheckForCollectableDisable() {
         GameObject collectableToDisable = collectables.First();
         if(collectableToDisable.transform.position.x < playerTransform.position.x - positionOffsetX) {
@@ -83,6 +85,8 @@ public class ObjectSpawner : MonoBehaviour
             collectables.Remove(collectableToDisable);
         }
     }
+
+    //This checks if object schould be disabled or not
     private void CheckForDisable(List<GameObject> objects)
     {
         GameObject ObjectToDisable = objects.First();
@@ -93,6 +97,7 @@ public class ObjectSpawner : MonoBehaviour
         }
     }
 
+    //This function reset collections to initial state and disable objects from pools
     private void DisbaleAllObjectsAfterDeath() {
         foreach(var item in collectables) {
             ObjectPooler.Instance.DisableFromPool(item);
@@ -105,6 +110,7 @@ public class ObjectSpawner : MonoBehaviour
         sandBoxQuantity = 0;
     }
 
+    //Spawning rocks Randomcy with random scale and position on the map
     private IEnumerator SpawnRocks() {
         int randomSeconds = Random.Range(3, 6);
         yield return new WaitForSeconds(randomSeconds);
@@ -133,6 +139,7 @@ public class ObjectSpawner : MonoBehaviour
         spawningRockCoroutine = false;
     }
 
+    //Function which randomly spwan mines in time intervals
     private IEnumerator SpawnMines() {
         int randomSeconds = Random.Range(15,30);
         Debug.Log(randomSeconds);

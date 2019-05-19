@@ -29,6 +29,7 @@ public class ButtonHandler : MonoBehaviour {
         OnClickStartButton += EnableMoveScript;
         OnClickStartButton += ChangeGameStateToGame;
         OnClickStartButton += slideInGameUI;
+        OnClickStartButton += SetAdditionalLife;
         OnClickShopButton += MoveObjects;
         OnClickShopButton += ShopClick;
         OnClickTryAgainButton += HideDeathPanel;
@@ -90,6 +91,7 @@ public class ButtonHandler : MonoBehaviour {
         deathMaskPanel.DOSizeDelta(new Vector2(0, 0), 0); 
     }
 
+    //Turns off dolphins movement
     void DisableMoveScript() {
         dolphinRig.velocity = new Vector3(0, 0, 0);
         dolphinRig.angularVelocity = new Vector3(0, 0, 0);
@@ -117,5 +119,13 @@ public class ButtonHandler : MonoBehaviour {
     void slideOutGameUI() {
         slider.DOAnchorPosY(30, 1f);
         fishCounterScore.DOAnchorPosY(30, 1f);
+    }
+
+    void SetAdditionalLife() {
+        DolphinDeath.additionalLife = GameState.upgradesBought[1];
+    }
+
+    public void ExitApp() {
+        Application.Quit();
     }
 }
