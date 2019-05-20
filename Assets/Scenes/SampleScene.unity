@@ -3154,6 +3154,16 @@ PrefabInstance:
       propertyPath: holdingBreathTime
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1631433375030131721, guid: c54eb355387fc764bb3668108374d990,
+        type: 3}
+      propertyPath: upDownSpeedMax
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631433375030131726, guid: c54eb355387fc764bb3668108374d990,
+        type: 3}
+      propertyPath: m_Mass
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c54eb355387fc764bb3668108374d990, type: 3}
 --- !u!1 &1504832378
@@ -3277,12 +3287,6 @@ MonoBehaviour:
 --- !u!54 &1537089002 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 1631433375030131726, guid: c54eb355387fc764bb3668108374d990,
-    type: 3}
-  m_PrefabInstance: {fileID: 1484703521}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &1537089003 stripped
-MeshCollider:
-  m_CorrespondingSourceObject: {fileID: 1537089007, guid: c54eb355387fc764bb3668108374d990,
     type: 3}
   m_PrefabInstance: {fileID: 1484703521}
   m_PrefabAsset: {fileID: 0}
@@ -4303,10 +4307,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 655732740, guid: 9a332d00311b2e34b88282c9521b3525, type: 3}
-      propertyPath: dolphinCollider
-      value: 
-      objectReference: {fileID: 1537089003}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a332d00311b2e34b88282c9521b3525, type: 3}
 --- !u!1001 &7958116515541867559

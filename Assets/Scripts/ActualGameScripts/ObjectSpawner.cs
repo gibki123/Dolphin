@@ -8,6 +8,7 @@ public class ObjectSpawner : MonoBehaviour
     public GameObject water;
     public GameObject sand;
     public Transform playerTransform;
+    public static ObjectSpawner Instance;
 
     private float topSpawningLimit;
     private float bottomSpawningLimit;
@@ -22,8 +23,12 @@ public class ObjectSpawner : MonoBehaviour
     private int sandBoxQuantity = 0;
     private float sandWidth;
     private bool spawningRockCoroutine = false;
+    private int scoreToChangeDifficulty = 10;
+    private float difficultyScale = 1;
+    private float[] randomMineSpawnTime = { 15, 30 };
 
     void Awake() {
+        Instance = this;
         sandWidth = sand.transform.localScale.x;
         terrainObjects = new List<GameObject>();
         collectables = new List<GameObject>();
@@ -33,10 +38,16 @@ public class ObjectSpawner : MonoBehaviour
         bottomSpawningLimit = waterPosition.y - water.transform.localScale.y / 2 + 1;
         ButtonHandler.OnClickTryAgainButton += DisbaleAllObjectsAfterDeath;
     }
-    void Start() {
-    }
+
+    public void ChangeMineSpawnRate() {
+        difficultyScale += 0.5f;
+        for (int i = 0; i < randomMineSpawnTime.Length; i++) {
+            randomMineSpawnTime[i] /= difficultyScale;
+        }
+    } 
 
     void Update() {
+        
         if(playerTransform.position.x > -10 + sandBoxQuantity*sandWidth)
         {
             sandBoxQuantity++;
@@ -90,7 +101,7 @@ public class ObjectSpawner : MonoBehaviour
     private void CheckForDisable(List<GameObject> objects)
     {
         GameObject ObjectToDisable = objects.First();
-        if (ObjectToDisable.transform.position.x < playerTransform.position.x - 3*positionOffsetX)
+        if (ObjectToDisable.transform.position.x < playerTransform.position.x - 4*positionOffsetX)
         {
             ObjectPooler.Instance.DisableFromPool(objects.First());
             objects.Remove(ObjectToDisable);
@@ -141,14 +152,13 @@ public class ObjectSpawner : MonoBehaviour
 
     //Function which randomly spwan mines in time intervals
     private IEnumerator SpawnMines() {
-        int randomSeconds = Random.Range(15,30);
-        Debug.Log(randomSeconds);
+        int randomSeconds = (int)Random.Range(randomMineSpawnTime[0],randomMineSpawnTime[1]);
         int randomMinesNumber = Random.Range(5, 8);
         yield return new WaitForSeconds(randomSeconds);
         Vector3 spawnPosition = new Vector3(playerTransform.position.x + 50, 0, 0);
         for(int i = 0; i < randomMinesNumber; i++) {
-            spawnPosition.y = Random.Range(8f, 9f);
-            spawnPosition.x += Random.Range(5, 15);
+            spawnPosition.y = Random.Range(5f, 10f);
+            spawnPosition.x += Random.Range(10, 20);
             terrainObjects.Add(ObjectPooler.Instance.SpawnFromPool("Boat_Mine", spawnPosition));
         }
         spawningMinesCoroutine = false;

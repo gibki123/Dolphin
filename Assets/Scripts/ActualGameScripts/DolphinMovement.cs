@@ -11,6 +11,8 @@ public class DolphinMovement : MonoBehaviour
     public Slider breathingSlider;
     public float holdingBreathTime = 10;
     public float breathRegenerationTime = 3;
+    public float upDownSpeedMax;
+    public int scoreToChangeDifficulty = 10;
     bool inWater;
     private Rigidbody rb;
     void Awake() {
@@ -20,11 +22,27 @@ public class DolphinMovement : MonoBehaviour
         enabled = false;
         rb.useGravity = false;
     }
-
     void Update() {
-        if (!inWater) {
-            RegenerateBreath();
+        if (FishCounter.fishQuantity >= scoreToChangeDifficulty) {
+            scoreToChangeDifficulty += scoreToChangeDifficulty;
+            ObjectSpawner.Instance.ChangeMineSpawnRate();
+            swimSpeed++;
         }
+        if (rb.velocity.y < -upDownSpeedMax) {
+            rb.useGravity = false;
+        }
+        else {
+            rb.useGravity = true;
+        }
+        if (!inWater) {
+            rb.mass = 5;
+            RegenerateBreath();
+       
+        }
+        else {
+            rb.mass = 1;
+        }
+        Debug.Log(rb.velocity);
     }
 
     public void StartDolphin()
@@ -39,7 +57,7 @@ public class DolphinMovement : MonoBehaviour
         if(other == waterCollider && GameState.gamePlay == true)
         {
             inWater = true;
-            if (Input.GetButton("Fire1"))
+            if (Input.GetButton("Fire1") && rb.velocity.y < upDownSpeedMax)
             {
                 rb.AddForce(swimForce * Time.deltaTime);
             }
